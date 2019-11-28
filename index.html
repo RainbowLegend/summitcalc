@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  </head>
+  <body>
+    <div class="container rounded" align=center style="background-color:skyblue;margin-top:1em;margin-bottom:1em;padding-top:.5em;padding-bottom.5em;">
+      <h3 style="border-top:1em;">Cable Length (ft)</h3>
+      <input type="number" id="length" style="margin-bottom:1em;"> ($0.50/ft)
+    </div>
+
+    <div class="container rounded" style="background-color:skyblue;padding-top:1em;padding-bottom:1em;">
+      <div class="row">
+        <div class="col-sm" align=center>
+          <h3>Techflex</h3>
+          <input type="radio" name="techflex" value="0"> No 
+          <br>
+          <input type="radio" name="techflex" value="1"> Yes ($1.00/ft)
+          <br>
+        </div>
+        <div class="col-sm" align=center>
+          <h3>Host Connector</h3>
+          <input type="radio" name="host" value="0"> USB Type A 2.0 Silver
+          <br>
+          <input type="radio" name="host" value="0.75"> USB Type A 2.0 Gold ($0.75)
+          <br>
+        </div>
+        <div class="col-sm" align=center>
+          <h3>Device Connector</h3>
+          <input type="radio" name="device" value="0"> USB Mini B/Micro B Silver
+          <br>
+          <input type="radio" name="device" value="0.75"> USB Mini B/Micro B Gold ($0.75)
+          <br>
+          <input type="radio" name="device" value="2"> USB Type C 2.0 ($2.00)
+          <br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm" align=center>
+          <h3>Coil</h3>
+          <input type="radio" name="coils" value="0"> No
+          <br>
+          <input type="radio" name="coils" value="3"> 4" Coil ($5.00 + 3ft)
+          <br>
+          <input type="radio" name="coils" value="4"> 5" Coil ($6.00 + 4ft)
+          <br>
+          <input type="radio" name="coils" value="5"> 6" Coil ($7.00 + 5ft)
+          <br>
+          <input type="radio" name="coils" value="6"> 7" Coil ($8.00 + 6ft)
+          <br>
+          <input type="radio" name="coils" value="7"> 8" Coil ($9.00 + 7ft)
+          <br>
+        </div>
+        <div class="col-sm" align=center>
+          <h3>Detachable</h3>
+          <input type="radio" name="detachable" value="0"> No
+          <br>
+          <input type="radio" name="detachable" value="11"> Silver ($11.00)
+          <br>
+          <input type="radio" name="detachable" value="20"> CE/LE/SE ($20.00)
+        </div>
+        <div class="col-sm" align=center>
+          <h3>Accents</h3>
+          <input type="radio" name="accents" value="0"> No
+          <br>
+          <input type="radio" name="accents" value="3.50"> Yes ($3.50)
+          <br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm" align=center>
+          <h3>Extra Ends</h3>
+          <input type="radio" name="ends" value="0"> No
+          <br>
+          <input type="radio" name="ends" value="21"> Silver ($21.00)
+          <br>
+          <input type="radio" name="ends" value="26"> CE ($26.00)
+          <br>
+        </div>
+        <!--
+        <div class="col-sm" align=center>
+          <h3>Shipping</h3>
+          <input type="radio" name="shipping" value="3.79"> USA ($3.79)
+          <br>
+          <input type="radio" name="shipping" value="10"> Canada ($10.00)
+          <br>
+          <input type="radio" name="shipping" value="14"> International ($14.00)
+          <br>
+        </div>
+        -->
+      </div>
+    </div>
+    <div class="container rounded" align=center style="background-color:skyblue;margin-top:1em;margin-bottom:1em;padding-top:.5em;">
+      <input type="button" value="Click here to calculate/update price" id="btn">
+      <br>
+      <h2>Total Price</h2>
+      <p id="price" style="padding-bottom:.5em;">No options entered!</p>
+    </div>
+  </body>
+  <script>
+    function updatePrices() {
+      if ($("#length").val() <= 0) {
+        $("#price").text("Cable length must be higher than 0!");
+        return;
+      }
+      if ($("input[name='host']:checked").val() == undefined) {
+        $("#price").text("Host connector is a required option!");
+        return;
+      }
+      if ($("input[name='device']:checked").val() == undefined) {
+        $("#price").text("Device connector is a required option!");
+        return;
+      }
+      /*if ($("input[name='shipping']:checked").val() == undefined) {
+        $("#price").text("Shipping is a required option!");
+        return;
+      }*/
+      var length = parseInt($("#length").val());
+      var techflex = parseInt($("input[name='techflex']:checked").val());
+      var host = parseFloat($("input[name='host']:checked").val());
+      var device = parseFloat($("input[name='device']:checked").val());
+      var coil = parseFloat($("input[name='coils']:checked").val());
+      var detachable = parseFloat($("input[name='detachable']:checked").val());
+      var accents = parseFloat($("input[name='accents']:checked").val());
+      var ends = parseFloat($("input[name='ends']:checked").val());
+      // var shipping = parseFloat($("input[name='shipping']:checked").val());
+
+      var price = 20.00;
+
+      if (!isNaN(coil)) {
+        var length = length + coil;
+      }
+
+      console.log(length);
+
+      if (length > 15) {
+        $("#price").text("The cable length is over the maximum of 15 feet!");
+        return;
+      }
+      
+      // calc paracord
+      if (length != 0) {
+        var price = price + (length - 1) * 0.50;
+      }
+      if (techflex == 1) {
+        var price = price + (length * 1);
+      }
+      if (!isNaN(host)) {
+        var price = price + host;
+      }
+      if (!isNaN(device)) {
+        var price = price + device;
+      }
+      if (!isNaN(detachable)) {
+        var price = price + detachable;
+      }
+      if (!isNaN(accents)) {
+        var price = price + accents;
+      }
+      if (!isNaN(coil)) {
+        if (coil !== 0) {
+          var price = price + (coil + 2);
+        }
+      }
+      if (!isNaN(ends)) {
+        var price = price + ends;
+      }
+      /* if (!isNaN(shipping)) {
+        var price = price + shipping;
+      } */
+      $("#price").text("$" + price + " (excl. shipping)");
+    }
+
+    $("#btn").on('click', updatePrices);
+
+  </script>
+</html>
