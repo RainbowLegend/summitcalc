@@ -8,7 +8,7 @@
   <body>
     <div class="container rounded" align=center style="background-color:skyblue;margin-top:1em;margin-bottom:1em;padding-top:.5em;padding-bottom.5em;">
       <h3 style="border-top:1em;">Cable Length (ft)</h3>
-      <input type="number" id="length" style="margin-bottom:1em;"> ($0.50/ft)
+      <input type="number" id="length" style="margin-bottom:1em;border-radius: 25px;text-align:center;width:5em;"> ($0.50/ft)
     </div>
 
     <div class="container rounded" style="background-color:skyblue;padding-top:1em;padding-bottom:1em;">
@@ -72,11 +72,9 @@
       <div class="row">
         <div class="col-sm" align=center>
           <h3>Extra Ends</h3>
-          <input type="radio" name="ends" value="0"> No
+          <input type="number" id="silver_ends" style="width:3em;border-radius: 25px;text-align:center;"> Silver ($21.00 per end)
           <br>
-          <input type="radio" name="ends" value="21"> Silver ($21.00)
-          <br>
-          <input type="radio" name="ends" value="26"> CE ($26.00)
+          <input type="number" id="colored_ends" style="width:3em;border-radius: 25px;text-align:center;"> CE ($26.00 per end)
           <br>
         </div>
         <!--
@@ -124,17 +122,14 @@
       var coil = parseFloat($("input[name='coils']:checked").val());
       var detachable = parseFloat($("input[name='detachable']:checked").val());
       var accents = parseFloat($("input[name='accents']:checked").val());
-      var ends = parseFloat($("input[name='ends']:checked").val());
+      var silverEnds = parseInt($("#silver_ends").val());
+      var coloredEnds = parseInt($("#colored_ends").val());
       // var shipping = parseFloat($("input[name='shipping']:checked").val());
-
       var price = 20.00;
-
       if (!isNaN(coil)) {
         var length = length + coil;
       }
-
       console.log(length);
-
       if (length > 15) {
         $("#price").text("The cable length is over the maximum of 15 feet!");
         return;
@@ -164,16 +159,17 @@
           var price = price + (coil + 2);
         }
       }
-      if (!isNaN(ends)) {
-        var price = price + ends;
+      if (!isNaN(silverEnds)) {
+        var price = price + (silverEnds * 21);
+      }
+      if (!isNaN(coloredEnds)) {
+        var price = price + (coloredEnds * 26);
       }
       /* if (!isNaN(shipping)) {
         var price = price + shipping;
       } */
       $("#price").text("$" + price + " (excl. shipping)");
     }
-
     $("#btn").on('click', updatePrices);
-
   </script>
 </html>
