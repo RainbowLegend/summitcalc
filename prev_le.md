@@ -2,11 +2,14 @@
 
 ## LE Dracula
 December 7th, 2019
+
 November 30th, 2019
 
 ## LE Glacier
 December 7th, 2019
+
 November 2nd, 2019
+
 October 5th, 2019
 
 ## LE Blackwidow
@@ -14,6 +17,7 @@ November 23rd, 2019
 
 ## LE Noir
 November 9th, 2019
+
 September 28th, 2019
 
 ## LE Nebula
