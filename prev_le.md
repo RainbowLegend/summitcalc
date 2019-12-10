@@ -9,6 +9,8 @@
 - November 2nd, 2019
 - October 5th, 2019
 
+<img src=”gx16/full-res/le-dracula.png” width=500px height=500px>
+
 ## LE Blackwidow
 - November 23rd, 2019
 
