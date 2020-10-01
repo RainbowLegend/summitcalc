@@ -1,3 +1,3 @@
 # summitcalc
 
-DEPRECATED
+DEPRECATED, SUMMIT SITE NOW @ rosecables.com
